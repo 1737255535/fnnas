@@ -109,6 +109,7 @@ on:
           - orangepi-zero3
           - painet-p3
           - panther-x2
+          - panther-x2-vpu
           - photonicat
           - r66s
           - r68s
@@ -441,7 +442,7 @@ jobs:
 
       - name: Package FnNAS for target boards
         if: ${{ steps.down.outputs.status == 'success' && !cancelled() }}
-        uses: ophub/fnnas@main
+        uses: ${{ github.repository }}@main
         with:
           fnnas_path: fnnas/*.img.xz
           fnnas_board: ${{ inputs.fnnas_board }}
