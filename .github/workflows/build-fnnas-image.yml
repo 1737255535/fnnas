@@ -440,9 +440,16 @@ jobs:
           echo "build_tag=${build_tag}" >> ${GITHUB_ENV}
           echo "status=success" >> ${GITHUB_OUTPUT}
 
+      - name: Checkout the fork repository (self-action)
+        uses: actions/checkout@v6
+        with:
+          repository: ${{ github.repository }}
+          ref: main
+          path: fnnas-repo
+
       - name: Package FnNAS for target boards
         if: ${{ steps.down.outputs.status == 'success' && !cancelled() }}
-        uses: ${{ github.repository }}@main
+        uses: fnnas-repo@main
         with:
           fnnas_path: fnnas/*.img.xz
           fnnas_board: ${{ inputs.fnnas_board }}
